@@ -11,18 +11,19 @@
         android:id="@+id/btvehiculo"
         android:layout_width="370dp"
         android:layout_height="60dp"
-        android:textSize="20dp"
         android:layout_gravity="center"
         android:layout_marginTop="250dp"
-        android:text="Vehiculo" />
+        android:text="@string/btVehiculo"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/bttiquete"
         android:layout_width="370dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:textSize="20dp"
         android:layout_gravity="center"
-        android:text="Tiquete" />
+        android:layout_marginTop="50dp"
+        android:onClick="Tiquete"
+        android:text="@string/btTiquete"
+        android:textSize="20dp" />
 
 </LinearLayout>

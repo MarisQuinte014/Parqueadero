@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Parqueadero</string>
+    <string name="btVehiculo">VEHICULO</string>
+    <string name="btTiquete">TIQUETE</string>
+    <string name="tiquete">TIQUETE POS</string>
+    <string name="NúmeroTiquete">Numero de Tiquete</string>
+    <string name="fecha">Fecha</string>
+    <string name="placa">Digite la placa:</string>
+    <string name="mensualidad">Mensualidad:</string>
+    <string name="estado">ACTIVO</string>
 </resources>
