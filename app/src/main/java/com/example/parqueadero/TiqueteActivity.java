@@ -13,6 +13,8 @@ public class TiqueteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiquete);
 
+        getSupportActionBar().hide();
+
     }
 
 
