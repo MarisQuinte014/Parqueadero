@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class VehiculoActivity extends AppCompatActivity {
 
-    CheckBox jcbmoto, jcbcarro, jcbactivo;
+    RadioButton jcbmoto, jcbcarro;
+    CheckBox jcbactivo;
     EditText jetplaca, jetmarca, jetmodelo;
     TextView jtvvalormensualidad;
     String placa, modelo, marca, tipo_vehiculo;
@@ -57,7 +59,7 @@ public class VehiculoActivity extends AppCompatActivity {
         }
 
         //Definir un contenedor para llevar la informacion a la base datsos
-        ContentValues registro=new ContentValues();
+        ContentValues registro = new ContentValues();
 
         //Llenar el contenedor
         registro.put("placa", placa);
@@ -69,7 +71,7 @@ public class VehiculoActivity extends AppCompatActivity {
         //Abrir conexion a la base de datos
         SQLiteDatabase db = admin.getWritableDatabase();
 
-        respuesta=db.insert("TblViaje",null,registro);
+        respuesta = db.insert("TblVehiculo",null,registro);
 
         if(respuesta > 0){
             Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();

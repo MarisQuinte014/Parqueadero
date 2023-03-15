@@ -13,6 +13,7 @@
         android:layout_height="60dp"
         android:textSize="20dp"
         android:layout_gravity="center"
+        android:onClick="Vehiculo"
         android:layout_marginTop="250dp"
         android:text="Vehiculo" />
 
