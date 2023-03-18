@@ -42,6 +42,18 @@ public class TiqueteActivity extends AppCompatActivity {
         jcbactivo=findViewById(R.id.cbactivo);
 
     }
+
+        //Metodo guardar
+
+        public void Guardar(View view){
+        codigo=jetnumeroTiquete.getText().toString();
+        fecha=jetfecha.getText().toString();
+        placa=jetplaca.getText().toString();
+        jtvtiquetePos.getText().toString();
+
+
+    }
+
         //Metogo regresar
 
         public void Regresar(View view){
@@ -50,5 +62,18 @@ public class TiqueteActivity extends AppCompatActivity {
 
         }
 
+        //Metodo limpiar
+
+        public void Limpiar (View view) {
+        Limpiar_campos();}
+        public void Limpiar_campos(){
+            jetnumeroTiquete.setText("");
+            jetfecha.setText("");
+            jetplaca.setText("");
+            jtvtiquetePos.setText("");
+            // definir como este campo de mensualidad
+            jcbactivo.setChecked(false);
+
+        }
 
 }
