@@ -12,4 +12,7 @@
     <string name="anular">ANULAR</string>
     <string name="limpiar">LIMPIAR</string>
     <string name="regresar">REGRESAR</string>
+    <string name="consultar">CONSULTAR</string>
+    <string name="marca">MARCA:</string>
+    <string name="modelo">MODELO:</string>
 </resources>
