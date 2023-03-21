@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Parqueadero</string>
+    <string name="btVehiculo">VEHICULO</string>
+    <string name="btTiquete">TIQUETE</string>
+    <string name="tiquete">TIQUETE POS PARQUEADERO CESDE</string>
+    <string name="NúmeroTiquete">Numero de Tiquete</string>
+    <string name="fecha">Fecha</string>
+    <string name="placa">Digite la placa:</string>
+    <string name="mensualidad">Mensualidad:</string>
+    <string name="estado">ACTIVO</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="anular">ANULAR</string>
+    <string name="limpiar">LIMPIAR</string>
+    <string name="regresar">REGRESAR</string>
+    <string name="consultar">CONSULTAR</string>
+    <string name="marca">MARCA:</string>
+    <string name="modelo">MODELO:</string>
 </resources>
