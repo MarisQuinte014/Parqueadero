@@ -12,6 +12,7 @@
         android:layout_width="370dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
+        android:onClick="Vehiculo"
         android:layout_marginTop="250dp"
         android:text="@string/btVehiculo"
         android:textSize="20dp" />
