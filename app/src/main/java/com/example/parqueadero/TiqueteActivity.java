@@ -2,6 +2,7 @@ package com.example.parqueadero;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,24 +15,14 @@ import android.widget.Toast;
 
 public class TiqueteActivity extends AppCompatActivity {
 
-    EditText jetnumeroTiquete, jetfecha, jetplaca;
-
-    TextView jtvtiquetePos, jtvmensualidad; //confirmar si mensualidad si va aca (por ser primaria de otra tabla)
-
+    EditText jetnumeroTiquete, jetfecha, jetplacatiquete;
+    TextView jtvtiquetePos, jtvmensualidad, jtvmodelotiquete;
     CheckBox jcbactivo;
-
-
-    String codigo, fecha, placa, activo;
-
+    String codigo, fecha, placa;
     long respuesta;
-
     byte sw;
-
-
-
-
-    ClsOpenHelper admin=new ClsOpenHelper(this,"TblTiquete.db",null,1);
-
+    ClsOpenHelper tiquete = new ClsOpenHelper(this,"TblTiquete.db",null,1);
+    ClsOpenHelper admint = new ClsOpenHelper(this,"TblVehiculo.db",null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,63 +33,56 @@ public class TiqueteActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // Ocultar la barra de titulo por defecto y asociar objetos Xml y Java entre la logica (java) y la parte grafica (xml)
-
         jetnumeroTiquete=findViewById(R.id.etnumeroTiquete);
         jetfecha=findViewById(R.id.etfecha);
-        jetplaca=findViewById(R.id.etplaca);
+        jetplacatiquete=findViewById(R.id.etplaca);
         jtvtiquetePos=findViewById(R.id.tvtiquetePos);
         jtvmensualidad=findViewById(R.id.tvmensualidad);
         jcbactivo=findViewById(R.id.cbactivo);
+        jtvmodelotiquete = findViewById(R.id.tvmodelotiquetes);
         sw=0;
-
     }
-        //Metodo guardar
         public void Guardar(View view){
 
-        //Definir un contenedor para llevar la informacion a la base de datos
-        ContentValues registro=new ContentValues();
+        codigo = jetnumeroTiquete.getText().toString();
+        fecha  = jetfecha.getText().toString();
+        placa  = jetplacatiquete.getText().toString();
 
-        codigo=jetnumeroTiquete.getText().toString();
-        fecha=jetfecha.getText().toString();
-        placa=jetplaca.getText().toString();
-        jtvtiquetePos.getText().toString();
+        ContentValues registryEtiquette = new ContentValues();
 
-        // aca van las condiciones para guardar
+            registryEtiquette.put("codigo",codigo);
+            registryEtiquette.put("fecha",fecha);
+            registryEtiquette.put("placa",placa);
 
-        //Llenar el contenedor
+            SQLiteDatabase db = admint.getWritableDatabase();
+            SQLiteDatabase ticket = tiquete.getWritableDatabase();
+            Cursor filav = db.rawQuery("select * from TblVehiculo where placa = '" + placa + "'",null);
 
-        registro.put("codigo", codigo);
-        registro.put("fecha",fecha);
-        registro.put("placa",placa);
-        registro.put("activo",activo);
-        //registro.put("mensualidad",valor_mensualidad);
+            if(filav.moveToNext()){
+                if(filav.getString(4).equals("Si")) {
+                    respuesta = ticket.insert("TblTiquete",null,registryEtiquette);
 
-
-        //Abrir conexion a la base de datos
-            SQLiteDatabase db = admin.getWritableDatabase();
-
-            if (sw == 0)
-            respuesta=db.insert("Tbltiquete",null,registro);
-            else{
-                sw=0;
-                respuesta=db.update("TblTiquete",registro,"codigo='"+codigo+"'",null);
-            }
-            if (respuesta > 0){
-                Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();
-                Limpiar_campos();
+                    if (respuesta > 0){
+                        Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();
+                        Limpiar_campos();
+                    }else{
+                        Toast.makeText(this, "Error guardando registro", Toast.LENGTH_SHORT).show();
+                    }
+                    //db.close();
+                }else{
+                    Toast.makeText(this, "No podemos agregar ticket porque el vehiculo no esta activo", Toast.LENGTH_SHORT).show();
+                }
             }else{
-                Toast.makeText(this, "Error guardando registro", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No podemos agregar ticket porque el vehiculo no existe", Toast.LENGTH_SHORT).show();
             }
-            db.close();
         }
-        //Fin llenar contenedor
 
-    public void Anular(View view){
+        public void Anular(View view){
         if (sw == 0){
             Toast.makeText(this, "Para anular debe primero buscar", Toast.LENGTH_SHORT).show();
             jetnumeroTiquete.requestFocus();
         }else{
-            SQLiteDatabase db=admin.getWritableDatabase();
+            SQLiteDatabase db = tiquete.getWritableDatabase();
             ContentValues registro=new ContentValues();
             registro.put("activo","No");
             respuesta=db.update("TblTiquete",registro,"codigo='"+codigo+"'",null);
@@ -112,26 +96,51 @@ public class TiqueteActivity extends AppCompatActivity {
         }
     }
 
-
-        //Metogo regresar
-
         public void Regresar(View view){
             Intent regresar = new Intent(this, MainActivity.class);
             startActivity(regresar);
-
         }
 
-        //Metodo limpiar
+        public void Consultar(View view){
+            codigo = jetnumeroTiquete.getText().toString();
 
-        public void Limpiar (View view) {
-        Limpiar_campos();}
+            if(codigo.isEmpty()){
+                Toast.makeText(this, "Código requerido para consultar", Toast.LENGTH_SHORT).show();
+                jetnumeroTiquete.requestFocus();
+            }else{
+                SQLiteDatabase db = tiquete.getReadableDatabase();
+                Cursor consultCodio = db.rawQuery("select * from TblTiquete where codigo = '" + codigo + "'", null);
+                //db.close();
+
+                if(consultCodio.moveToNext()){
+                    sw = 1;
+                    jetnumeroTiquete.setText(consultCodio.getString(0));
+                    jetfecha.setText(consultCodio.getString(1));
+                    jetplacatiquete.setText(consultCodio.getString(2));
+                    placa = jetplacatiquete.getText().toString();
+                    SQLiteDatabase dbd = admint.getReadableDatabase();
+                    Cursor filat = dbd.rawQuery("select modelo,marca from TblVehiculo where placa = '" + placa + "' ", null);
+                    if(filat.moveToNext()){
+                        jtvmensualidad.setText(filat.getString(0));
+                        jtvmodelotiquete.setText(filat.getString(1));
+                    }
+                }else{
+                    Toast.makeText(this, "Código no registrado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        public void LimpiarTiquete (View view) {
+            Limpiar_campos();
+        }
+
         public void Limpiar_campos(){
-            jetnumeroTiquete.setText("");
+            //jetnumeroTiquete.setText("");
             jetfecha.setText("");
-            jetplaca.setText("");
+            jetplacatiquete.setText("");
             jtvtiquetePos.setText("");
             // definir como este campo de mensualidad
-            jcbactivo.setChecked(false);
+            //jcbactivo.setChecked(false);
 
         }
 

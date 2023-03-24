@@ -74,6 +74,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etplaca" />
 
+    <TextView
+        android:id="@+id/tvmodelotiquetes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/modelo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvmensualidad" />
+
 
     <CheckBox
         android:id="@+id/cbactivo"
@@ -86,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmensualidad" />
+        app:layout_constraintTop_toBottomOf="@+id/tvmodelotiquetes" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -104,6 +114,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:onClick="Consultar"
             android:text="@string/consultar" />
 
         <Button
@@ -130,6 +141,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:onClick="LimpiarTiquete"
             android:text="@string/limpiar" />
 
         <Button
@@ -158,15 +170,7 @@
             android:text="@string/regresar" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/modelo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmensualidad" />
+
 
 
 </android.support.constraint.ConstraintLayout>

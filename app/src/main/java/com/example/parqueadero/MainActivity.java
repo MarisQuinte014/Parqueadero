@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Tiquete(View view){
         Intent tiquete = new Intent(this, TiqueteActivity.class);
-        startActivity(tiquete);
+        startActivity(tiquete);}
 
 
     public void Vehiculo(View view){

@@ -21,7 +21,7 @@ public class ClsOpenHelper extends SQLiteOpenHelper {
                 "mensualidad integer not null)"
         );
         db.execSQL("create table TblTiquete " +
-                "(codigo text primary key," +
+                "( codigo text primary key," +
                 " fecha text not null," +
                 " placa text not null," +
                 " activo text default 'Si'," +
