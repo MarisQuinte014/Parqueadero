@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -17,7 +18,7 @@ public class TiqueteActivity extends AppCompatActivity {
 
     EditText jetnumeroTiquete, jetfecha, jetplacatiquete;
     TextView jtvtiquetePos, jtvmensualidad, jtvmodelotiquete;
-    CheckBox jcbactivo;
+    Switch jcbactivo;
     String codigo, fecha, placa;
     long respuesta;
     byte sw;
@@ -135,13 +136,10 @@ public class TiqueteActivity extends AppCompatActivity {
         }
 
         public void Limpiar_campos(){
-            //jetnumeroTiquete.setText("");
+            jetnumeroTiquete.setText("");
             jetfecha.setText("");
             jetplacatiquete.setText("");
-            jtvtiquetePos.setText("");
-            // definir como este campo de mensualidad
-            //jcbactivo.setChecked(false);
-
+            jcbactivo.setChecked(false);
         }
 
 }

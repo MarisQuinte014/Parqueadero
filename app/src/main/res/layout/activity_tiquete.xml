@@ -1,121 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D0D3D4"
     tools:context=".TiqueteActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="?attr/actionModeCloseDrawable"
+        android:background="@drawable/boton_salir"
+        android:elevation="0dp"
+        android:layout_marginLeft="4dp"
+        android:onClick="Regresar"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="Salir" />
 
     <TextView
         android:id="@+id/tvtiquetePos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/tiquete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#D35400" />
 
     <ImageView
         android:id="@+id/imgTiquete"
         android:layout_width="184dp"
         android:layout_height="111dp"
         android:layout_marginTop="28dp"
+        android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvtiquetePos"
         app:srcCompat="@drawable/facura_pos" />
 
-    <EditText
-        android:id="@+id/etnumeroTiquete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="250dp"
+        android:layout_height="69dp"
         android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/NúmeroTiquete"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgTiquete" />
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/imgTiquete">
 
-    <EditText
-        android:id="@+id/etfecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/fecha"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnumeroTiquete" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/etnumeroTiquete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:hint="Código de tiquete"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/etplaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="@string/placa"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etfecha" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="250dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="18dp"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/etnumeroTiquete">
 
-    <TextView
-        android:id="@+id/tvmensualidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/marca"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etplaca" />
-
-    <TextView
-        android:id="@+id/tvmodelotiquetes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/modelo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmensualidad" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/etfecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:hint="Fecha (dd/mm/aaaa)"
+            android:inputType="date"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
 
 
-    <CheckBox
+
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="69dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/etplaca">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etplaca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center"
+                android:hint="Placa"
+                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/buscarplaca"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@android:drawable/ic_menu_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/etplaca">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Modelo vehiculo: "
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvmensualidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text=""
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hola"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/etplaca">
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Marca vehiculo: "
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvmodelotiquetes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:text=""
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <Switch
         android:id="@+id/cbactivo"
-        android:layout_width="266dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="40dp"
-        android:layout_weight="1"
-        android:text="  Activo"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvmodelotiquetes" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_gravity="center"
+        android:text="Activo"
+        android:checked="true"
+         />
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="387dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbactivo">
-
-
-        <Button
-            android:id="@+id/consultar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:onClick="Consultar"
-            android:text="@string/consultar" />
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp">
 
         <Button
             android:id="@+id/guardar"
@@ -123,24 +201,39 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:onClick="Guardar"
+            android:background="@drawable/botones_general"
+            android:layout_marginRight="2dp"
+            android:drawableStart="@android:drawable/ic_menu_save"
             android:text="@string/guardar" />
+
+        <Button
+            android:id="@+id/consultar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:onClick="Consultar"
+            android:background="@drawable/botones_general"
+            android:layout_marginLeft="2dp"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:text="@string/consultar" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="384dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp">
 
         <Button
             android:id="@+id/limpiar"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
+            android:background="@drawable/botones_general"
+            android:drawableStart="@android:drawable/ic_menu_view"
             android:onClick="LimpiarTiquete"
             android:text="@string/limpiar" />
 
@@ -148,29 +241,17 @@
             android:id="@+id/anular"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginLeft="2dp"
             android:layout_weight="1"
+            android:background="@drawable/botones_general"
+            android:drawableStart="@android:drawable/ic_menu_close_clear_cancel"
             android:onClick="Anular"
             android:text="@string/anular" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="159dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <Button
-            android:id="@+id/regresar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:onClick="Regresar"
-            android:text="@string/regresar" />
-    </LinearLayout>
 
 
 
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

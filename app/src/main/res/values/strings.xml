@@ -2,7 +2,7 @@
     <string name="app_name">Parqueadero</string>
     <string name="btVehiculo">VEHICULO</string>
     <string name="btTiquete">TIQUETE</string>
-    <string name="tiquete">TIQUETE POS PARQUEADERO CESDE</string>
+    <string name="tiquete">TIQUETE PARQUEADERO</string>
     <string name="NúmeroTiquete">Numero de Tiquete</string>
     <string name="fecha">Fecha</string>
     <string name="placa">Digite la placa:</string>
