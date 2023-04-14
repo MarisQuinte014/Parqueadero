@@ -118,6 +118,11 @@ public class TiqueteActivity extends AppCompatActivity {
                     jetnumeroTiquete.setText(consultCodio.getString(0));
                     jetfecha.setText(consultCodio.getString(1));
                     jetplacatiquete.setText(consultCodio.getString(2));
+                    if(consultCodio.getString(3).equals("Si")){
+                        jcbactivo.setChecked(true);
+                    }else{
+                        jcbactivo.setChecked(false);
+                    }
                     placa = jetplacatiquete.getText().toString();
                     SQLiteDatabase dbd = admint.getReadableDatabase();
                     Cursor filat = dbd.rawQuery("select modelo,marca from TblVehiculo where placa = '" + placa + "' ", null);
@@ -127,6 +132,41 @@ public class TiqueteActivity extends AppCompatActivity {
                     }
                 }else{
                     Toast.makeText(this, "Código no registrado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
+        public void ConsultarPlaca(View view){
+            placa = jetplacatiquete.getText().toString();
+
+            if(placa.isEmpty()){
+                Toast.makeText(this, "Placa requerido para consultar", Toast.LENGTH_SHORT).show();
+                jetplacatiquete.requestFocus();
+            }else{
+                SQLiteDatabase db = admint.getReadableDatabase();
+                Cursor consultVehi = db.rawQuery("select modelo,marca from TblVehiculo where placa = '" + placa + "'", null);
+
+                if(consultVehi.moveToNext()){
+                    sw = 1;
+                    jtvmodelotiquete.setText(consultVehi.getString(0));
+                    jtvmensualidad.setText(consultVehi.getString(1));
+
+
+                    SQLiteDatabase dbd = tiquete.getReadableDatabase();
+                    Cursor filat = dbd.rawQuery("select codigo,fecha,activo from TblTiquete where placa = '" + placa + "' ", null);
+                    if(filat.moveToNext()){
+                        jetnumeroTiquete.setText(filat.getString(0));
+                        jetfecha.setText(filat.getString(1));
+
+                        if(filat.getString(2).equals("Si")){
+                            jcbactivo.setChecked(true);
+                        }else {
+                            jcbactivo.setChecked(false);
+                        }
+                    }
+                }else{
+                    Toast.makeText(this, "Placa no registrada", Toast.LENGTH_SHORT).show();
                 }
             }
         }

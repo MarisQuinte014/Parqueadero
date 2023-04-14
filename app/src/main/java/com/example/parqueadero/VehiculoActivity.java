@@ -1,6 +1,7 @@
 package com.example.parqueadero;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +23,9 @@ public class VehiculoActivity extends AppCompatActivity {
 
     RadioButton jcbmoto, jcbcarro;
     Switch jcbactivo;
-    Spinner jmarcas;
     EditText jetplaca, jetmarca, jetmodelo;
     TextView jtvvalormensualidad;
-    String placa, modelo, marca, tipo_vehiculo, marcas;
+    String placa, modelo, marca, tipo_vehiculo;
     int valor_mensualidad;
     long respuesta;
     byte sw;
@@ -41,46 +41,19 @@ public class VehiculoActivity extends AppCompatActivity {
         jcbcarro = findViewById(R.id.cbcarro);
         jcbactivo = findViewById(R.id.cbactivo);
         jetplaca = findViewById(R.id.tvplaca);
-        //jetmarca = findViewById(R.id.tvmarca);
+        jetmarca = findViewById(R.id.tvmarca);
         jetmodelo = findViewById(R.id.tvmodelo);
         jtvvalormensualidad = findViewById(R.id.tvvalormensualidad);
-        jmarcas = findViewById(R.id.SelectorMarca);
+        //jmarcas = findViewById(R.id.SelectorMarca);
         sw = 0;
 
-        ArrayList<String> marcasTipo = new ArrayList<String>();
 
-        marcasTipo.add("Seleccione una marca ");
-        marcasTipo.add("BMW");
-        marcasTipo.add("Mercedes-Benz");
-        marcasTipo.add("Audi");
-        marcasTipo.add("Renault");
-        marcasTipo.add("AKT");
-        marcasTipo.add("Ford");
-        marcasTipo.add("Volvo");
-        marcasTipo.add("HONDA");
-        marcasTipo.add("BAJAJ");
-        marcasTipo.add("Auteco");
-
-        ArrayAdapter adp = new ArrayAdapter(VehiculoActivity.this, android.support.design.R.layout.support_simple_spinner_dropdown_item, marcasTipo);
-        jmarcas.setAdapter(adp);
-
-        jmarcas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                marcas = (String) jmarcas.getAdapter().getItem(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     public void GuardarVehiculo(View view){
         placa = jetplaca.getText().toString();
         modelo = jetmodelo.getText().toString();
-        marca = marcas;
+        marca = jetmarca.getText().toString();;
 
         if(placa.isEmpty() || modelo.isEmpty() || marca.isEmpty()){
             Toast.makeText(this, "La placa, el modelo y la marca son obligatorios para guardar", Toast.LENGTH_SHORT).show();
@@ -142,7 +115,7 @@ public class VehiculoActivity extends AppCompatActivity {
 
                 sw = 1;
                 jetmodelo.setText(fila.getString(3));
-                marca = fila.getString(fila.getColumnIndexOrThrow("marca"));
+                jetmarca.setText(fila.getString(2));
                 jtvvalormensualidad.setText(fila.getString(5));
 
                 if (fila.getString(4).equals("Si")){
@@ -175,6 +148,7 @@ public class VehiculoActivity extends AppCompatActivity {
             SQLiteDatabase db = admin.getWritableDatabase();
             ContentValues registro = new ContentValues();
             registro.put("activo","No");
+            jcbactivo.setChecked(false);
             respuesta = db.update("TblVehiculo", registro,"placa = '" + placa + "'",null);
             if(respuesta > 0){
                 Toast.makeText(this, "Registro anulado", Toast.LENGTH_SHORT).show();
@@ -186,23 +160,14 @@ public class VehiculoActivity extends AppCompatActivity {
         }
     }
 
+    public void RegresarVehiculo(View view){
+        Intent regresarVehiculo = new Intent(this, MainActivity.class);
+        startActivity(regresarVehiculo);
+    }
+
     public void Limpiar_campos(){
-        ArrayList<String> marcasTipo = new ArrayList<String>();
-        marcasTipo.add("Seleccione una marca ");
-        marcasTipo.add("BMW");
-        marcasTipo.add("Mercedes-Benz");
-        marcasTipo.add("Audi");
-        marcasTipo.add("Renault");
-        marcasTipo.add("AKT");
-        marcasTipo.add("Ford");
-        marcasTipo.add("Volvo");
-        marcasTipo.add("HONDA");
-        marcasTipo.add("BAJAJ");
-        marcasTipo.add("Auteco");
 
-        ArrayAdapter adp = new ArrayAdapter(VehiculoActivity.this, android.support.design.R.layout.support_simple_spinner_dropdown_item, marcasTipo);
-
-        jmarcas.setAdapter(adp);
+        jetmarca.setText("");
         jetplaca.setText("");
         jetmodelo.setText("");
         //jtvvalormensualidad.setText("");

@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/parqueadero2"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btvehiculo"
-        android:layout_width="370dp"
+        android:layout_width="270dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:onClick="Vehiculo"
         android:layout_marginTop="250dp"
+        android:onClick="Vehiculo"
         android:text="@string/btVehiculo"
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/bttiquete"
-        android:layout_width="370dp"
+        android:layout_width="270dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:onClick="Tiquete"
         android:text="@string/btTiquete"
         android:textSize="20dp" />
